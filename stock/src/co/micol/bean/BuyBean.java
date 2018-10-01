@@ -37,5 +37,10 @@ public class BuyBean {
 	public void setB_rep(String b_rep) {
 		this.b_rep = b_rep;
 	}
+	@Override
+	public String toString() {
+		return "BuyBean [b_code=" + b_code + ", b_name=" + b_name + ", b_addr=" + b_addr + ", b_tel=" + b_tel
+				+ ", b_rep=" + b_rep + "]";
+	}
 
 }

@@ -44,4 +44,10 @@ public class InBean {
 	public void setDate(String date) {
 		this.date = date;
 	}
+	@Override
+	public String toString() {
+		return "InBean [in_code=" + in_code + ", in_line=" + in_line + ", in_amount=" + in_amount + ", in_price="
+				+ in_price + ", in_sum=" + in_sum + ", date=" + date + "]";
+	}
+	
 }

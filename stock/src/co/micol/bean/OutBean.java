@@ -2,7 +2,7 @@ package co.micol.bean;
 
 public class OutBean {
 	private int out_code;
-	private int out_loute;
+	private int out_line;
 	private int out_amount;
 	private int out_price;
 	private int out_sum;
@@ -14,11 +14,11 @@ public class OutBean {
 	public void setOut_code(int out_code) {
 		this.out_code = out_code;
 	}
-	public int getOut_loute() {
-		return out_loute;
+	public int getOut_line() {
+		return out_line;
 	}
-	public void setOut_loute(int out_loute) {
-		this.out_loute = out_loute;
+	public void setOut_line(int out_loute) {
+		this.out_line = out_loute;
 	}
 	public int getOut_amount() {
 		return out_amount;

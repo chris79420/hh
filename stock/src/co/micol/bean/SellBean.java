@@ -37,5 +37,10 @@ public class SellBean {
 	public void setS_rep(String s_rep) {
 		this.s_rep = s_rep;
 	}
+	@Override
+	public String toString() {
+		return "SellBean [s_code=" + s_code + ", s_name=" + s_name + ", s_addr=" + s_addr + ", s_tel=" + s_tel
+				+ ", s_rep=" + s_rep + "]";
+	}
 	
 }
