@@ -84,7 +84,6 @@ public class SellDao {
 
 		System.out.println("삭제할 업체코드를 입력");
 		String tmp = sc.nextLine();
-		sc.nextLine();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, tmp);
@@ -98,8 +97,17 @@ public class SellDao {
 	}
 	
 	
-	public void editBuy(SellBean eb) {
+	public void editBuy() {
 		
+		System.out.println("수정하려는 것을 고르시오(b_code:1 "+
+		"업체명 b_name:2 " + 
+		"주소 b_addr:3 " + 
+		"연락처 b_tel:4" + 
+		"대표자명 b_rep:5");
+		int temp = sc.nextInt();
+		sc.nextLine();
+		
+		SellBean eb;
 		
 		String sql;/*="update buy_ent set ~~~~"+
 					"where b_id=?";

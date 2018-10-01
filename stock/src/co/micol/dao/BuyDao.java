@@ -83,12 +83,15 @@ public class BuyDao {
 		String sql="delete from buy_ent where b_code = ?";
 		System.out.println("삭제할 업체코드를 입력");
 		String tmp = sc.nextLine();
-		sc.nextLine();
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, tmp);
-			pstmt.executeUpdate();
-			
+			int res=pstmt.executeUpdate();
+			if(res>0)
+				System.out.println("삭제하였습니다.");
+			else
+				System.out.println("삭제할데이터가 없습니다. 입력한 코드를 확인해주세요");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
