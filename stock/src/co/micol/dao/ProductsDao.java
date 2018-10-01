@@ -14,7 +14,7 @@ public class ProductsDao {
 	private PreparedStatement psmt;
 	private ResultSet rs;
 	private int r;
-	private String sql;
+	private String sql; 
 	
 	public ProductsDao() {
 		try {
