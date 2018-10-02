@@ -98,7 +98,7 @@ public class SellDao {
 	}
 	
 	
-	public void editBuy(SellBean eb) {
+	public void editSell(SellBean eb) {
 		
 		
 		String sql;/*="update buy_ent set ~~~~"+
@@ -118,7 +118,7 @@ public class SellDao {
 		}
 	}
 	
-	public void searchBuy(String temp) {
+	public void searchSell(String temp) {
 		String sql="select * from buy_ent where b_code = ? or b_name=?";
 		SellBean sb = new SellBean();
 		
@@ -150,9 +150,7 @@ public class SellDao {
 		//return sb;
 		
 	}
-	public void BuySearch() {
-		
-	}
+	
 	public void viewSell() {
 		String sql = "select * from buy_ent";
 		SellBean sb = new SellBean();

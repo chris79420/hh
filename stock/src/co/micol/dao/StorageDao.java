@@ -29,20 +29,20 @@ public class StorageDao {
 		}
 	}
 
-	public int InsertStorage(StorageBean b) throws SQLException { // 창고 등록
+	public int InsertStorage(StorageBean istb) throws SQLException { // 창고 등록
 		sql = "insert into storage " + "values(?,?,?)";
 		System.out.println("창고 코드를 입력하세요.");
-		b.setSt_code(sc.nextInt());
+		istb.setSt_code(sc.nextInt());
 		System.out.println("창고 이름을 입력하세요");
-		b.setSt_name(sc.nextLine());
+		istb.setSt_name(sc.nextLine());
 		System.out.println("창고 설명을 입력하세요");
-		b.setSt_note(sc.nextLine());
+		istb.setSt_note(sc.nextLine());
 
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, b.getSt_code());
-			psmt.setString(2, b.getSt_name());
-			psmt.setString(3, b.getSt_note());
+			psmt.setInt(1, istb.getSt_code());
+			psmt.setString(2, istb.getSt_name());
+			psmt.setString(3, istb.getSt_note());
 
 			r = psmt.executeUpdate();
 
@@ -86,10 +86,10 @@ public class StorageDao {
 			psmt.setString(1, s);
 			rs = psmt.executeQuery();
 			if (rs.next()) {
-				StorageBean b = new StorageBean();
-				b.setSt_code(rs.getInt("st_code"));
-				b.setSt_name(rs.getString("st_name"));
-				b.setSt_note(rs.getString("st_note"));
+				StorageBean sstb = new StorageBean();
+				sstb.setSt_code(rs.getInt("st_code"));
+				sstb.setSt_name(rs.getString("st_name"));
+				sstb.setSt_note(rs.getString("st_note"));
 			} else
 				System.out.println("조회할 창고가 없습니다.");
 
@@ -106,10 +106,10 @@ public class StorageDao {
 			rs = psmt.executeQuery();
 			if (rs.next()) {
 				do {
-					StorageBean b = new StorageBean();
-					b.setSt_code(rs.getInt("st_code"));
-					b.setSt_name(rs.getString("st_name"));
-					b.setSt_note(rs.getString("st_note"));
+					StorageBean vstb = new StorageBean();
+					vstb.setSt_code(rs.getInt("st_code"));
+					vstb.setSt_name(rs.getString("st_name"));
+					vstb.setSt_note(rs.getString("st_note"));
 
 				} while (rs.next());
 			} else
