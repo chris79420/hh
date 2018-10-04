@@ -79,7 +79,7 @@ public class OutDao {
 			sc.nextLine();
 			System.out.println("상품코드를 입력하세요.");
 			pro_code = sc.nextLine();
-			sql= "exec create_purchase_info(?,to_char(sysdate,'yyyymmdd')||lpad(?,4,'0'),?,?)";
+			sql= "exec create_sell_info(?,to_char(sysdate,'yyyymmdd')||lpad(?,4,'0'),?,?)";
 
 			try {
 				
@@ -137,7 +137,7 @@ public class OutDao {
 		}
 	}
 
-	public void searchIn(int temp) {
+	public void searchOut(int temp) {
 		String sql = "select * from out_t where out_code = ?";
 		OutBean vb = new OutBean();
 
@@ -167,10 +167,6 @@ public class OutDao {
 			e.printStackTrace();
 
 		}
-
-	}
-
-	public void InSearch() {
 
 	}
 

@@ -85,7 +85,7 @@ public class Start {
 				if (c == 1) {
 					buy.insertBuy();
 				} else if (c == 2) {
-					buy.editBuy(bb);
+					buy.editBuy();
 				} else if (c == 3) {
 					buy.deleteBuy();
 				} else if (c == 4) {
