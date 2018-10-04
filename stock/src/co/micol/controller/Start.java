@@ -18,6 +18,7 @@ import co.micol.dao.StorageDao;
 public class Start {
 
 	public Start() throws SQLException {
+
 		Scanner sc = new Scanner(System.in);
 		ProductsBean pb = new ProductsBean();
 		StorageBean stb = new StorageBean();
@@ -67,7 +68,7 @@ public class Start {
 				if (b == 1) {
 					sto.InsertStorage(stb);
 				} else if (b == 2) {
-					sto.EditStorage();
+					sto.EditStorage(stb);
 				} else if (b == 3) {
 					sto.DeleteStorage();
 				} else if (b == 4) {
@@ -101,12 +102,11 @@ public class Start {
 				if (d == 1) {
 					sel.insertSell();
 				} else if (d == 2) {
-					sel.editSell(sb);
+					sel.insertSell();
 				} else if (d == 3) {
 					sel.deleteSell();
 				} else if (d == 4) {
-					String temp = sc.nextLine();
-					sel.searchSell(temp);
+					sel.searchSell();
 				} else if (d == 5) {
 					sel.viewSell();
 				} else
@@ -118,7 +118,7 @@ public class Start {
 			System.out.println("================================");
 			System.out.println("1. 입고정보관리 2. 출고정보관리 3. 상품별입출고 내역 4. 기간별입출고 내역");
 			int y = Integer.parseInt(sc.next());
-			//수정 필요
+//수정 필요
 			if (y == 1) {
 			} else if (y == 2) {
 			} else if (y == 3) {
@@ -146,6 +146,6 @@ public class Start {
 
 	public static void main(String[] args) throws SQLException {
 
-		Start main = new Start();
+		Start home = new Start();
 	}
 }

@@ -120,9 +120,10 @@ public class InDao {
 		}
 	}
 	
-	public InBean searchIn(int temp) {
+	public InBean searchIn() {
 		String sql="select * from in_t where in_code = ?";
 		InBean bb = new InBean();
+		int temp = sc.nextInt();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -149,9 +150,7 @@ public class InDao {
 		return bb;
 		
 	}
-	public void InSearch() {
-		
-	}
+	
 	public ResultSet viewIn() {
 		String sql = "select * from in_t";
 		InBean vb = new InBean();

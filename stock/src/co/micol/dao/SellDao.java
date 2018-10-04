@@ -126,9 +126,10 @@ public class SellDao {
 		}
 	}
 	
-	public void searchBuy(String temp) {
+	public void searchSell() {
 		String sql="select * from buy_ent where b_code = ? or b_name=?";
 		SellBean sb = new SellBean();
+		String temp =sc.nextLine();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -158,9 +159,7 @@ public class SellDao {
 		//return sb;
 		
 	}
-	public void BuySearch() {
-		
-	}
+
 	public void viewSell() {
 		String sql = "select * from buy_ent";
 		SellBean sb = new SellBean();

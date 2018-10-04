@@ -71,8 +71,52 @@ public class StorageDao {
 		ViewStorage();
 	}
 
-	public void EditStorage() { // 창고 수정
+	public void EditStorage(StorageBean stb) throws SQLException { // 창고 수정
+		sql = "update storage " + "set st_name = ?, st_note = ? " + "where st_code = ?";
+		ViewStorage();
+		System.out.println("========================");
+		System.out.println("수정할 창고 코드를 입력하세요.");
+		
+		stb.setSt_code(sc.nextInt());
 
+		try {
+				psmt.setString(1, stb.getSt_name());
+				psmt.setString(2, stb.getSt_note());
+				psmt.setInt(3, stb.getSt_code());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		System.out.println("===================");
+		System.out.println("수정할 대상을 선택하세요. 1 : 창고이름 2 : 창고설명");
+		int n = Integer.parseInt(sc.nextLine());
+
+		switch (n) {
+		case 1:
+			System.out.println("수정할 창고이름을 입력하세요.");
+			stb.setSt_name(sc.nextLine());
+			break;
+		case 2:
+			System.out.println("수정할 창고 설명을 입력하세요.");
+			stb.setSt_note(sc.nextLine());
+			break;
+		}
+		EditStorage(stb); // 수정 실행
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, stb.getSt_name());
+			psmt.setString(2, stb.getSt_note());
+			psmt.setInt(3, stb.getSt_code());
+			int r = psmt.executeUpdate();
+
+			if (r == 0)
+				System.out.println("수정에 실패했습니다'^'");
+			else
+				System.out.println("성공적으로 수정되었습니다:-)");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void SearchStorage() { // 창고 조회

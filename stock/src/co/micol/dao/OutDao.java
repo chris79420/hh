@@ -76,7 +76,7 @@ public class OutDao {
 		}
 	}
 
-	public void deleteIn() {
+	public void deleteOut() {
 		String sql = "delete from out_t where out_code = ?";
 
 		viewOut();
@@ -93,7 +93,7 @@ public class OutDao {
 		}
 	}
 
-	public void editIn(OutBean eb) {
+	public void editOut(OutBean eb) {
 
 		String sql;/*
 					 * ="update out_t set ~~~~"+ "where b_id=?";
@@ -111,9 +111,10 @@ public class OutDao {
 		}
 	}
 
-	public void searchIn(int temp) {
+	public void searchOut() {
 		String sql = "select * from out_t where out_code = ?";
 		OutBean vb = new OutBean();
+		int temp = sc.nextInt();
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -139,10 +140,6 @@ public class OutDao {
 			e.printStackTrace();
 
 		}
-
-	}
-
-	public void InSearch() {
 
 	}
 

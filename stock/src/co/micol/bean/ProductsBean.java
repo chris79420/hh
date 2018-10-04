@@ -7,6 +7,8 @@ public class ProductsBean {
 	private String pro_name;
 	private String pro_std;
 	private String pro_unit;
+	private int pro_price;
+	private int st_code;
 	
 	public String getCat_code() {
 		return cat_code;
@@ -38,6 +40,16 @@ public class ProductsBean {
 	public void setPro_unit(String pro_unit) {
 		this.pro_unit = pro_unit;
 	}
-	
-	
+	public int getPro_price() {
+		return pro_price;
+	}
+	public void setPro_price(int pro_price) {
+		this.pro_price = pro_price;
+	}
+	public int getSt_code() {
+		return st_code;
+	}
+	public void setSt_code(int st_code) {
+		this.st_code = st_code;
+	}
 }
