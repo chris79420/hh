@@ -46,7 +46,7 @@ public class Start {
 			if (x == 1) {
 				System.out.println("[기초정보 관리 - 품목정보] 원하는 메뉴를 선택하세요.");
 				System.out.println("===========================================");
-				System.out.println("1. 등록 2. 수정 3. 삭제 4. 검색 5. 목록");
+				System.out.println("1. 등록 2. 수정 3. 삭제 4. 검색 5. 전체목록");
 				int a = Integer.parseInt(sc.next());
 				if (a == 1) {
 					pro.InsertPro(pb);
@@ -58,12 +58,12 @@ public class Start {
 					pro.SearchPro();
 				} else if (a == 5) {
 					pro.ViewPro();
-				} else
+				} else					
 					System.out.println("잘못 입력했습니다. 다시 입력해주세요.");
 			} else if (x == 2) {
 				System.out.println("[기초정보 관리 - 창고정보] 원하는 메뉴를 선택하세요.");
 				System.out.println("===========================================");
-				System.out.println("1. 등록 2. 수정 3. 삭제 4. 검색 5. 목록");
+				System.out.println("1. 등록 2. 수정 3. 삭제 4. 검색 5. 전체목록");
 				int b = Integer.parseInt(sc.next());
 				if (b == 1) {
 					sto.InsertStorage(stb);
@@ -80,7 +80,7 @@ public class Start {
 			} else if (x == 3) {
 				System.out.println("[기초정보 관리 - 구매업체관리] 원하는 메뉴를 선택하세요.");
 				System.out.println("==============================================");
-				System.out.println("1. 등록 2. 수정 3. 삭제 4. 검색 5. 목록");
+				System.out.println("1. 등록 2. 수정 3. 삭제 4. 검색 5. 전체목록");
 				int c = Integer.parseInt(sc.next());
 				if (c == 1) {
 					buy.insertBuy();
@@ -97,7 +97,7 @@ public class Start {
 			} else if (x == 4) {
 				System.out.println("[기초정보 관리 - 판매업체 관리] 원하는 메뉴를 선택하세요.");
 				System.out.println("===============================================");
-				System.out.println("1. 등록 2. 수정 3. 삭제 4. 검색 5. 목록");
+				System.out.println("1. 등록 2. 수정 3. 삭제 4. 검색 5. 전체목록");
 				int d = Integer.parseInt(sc.next());
 				if (d == 1) {
 					sel.insertSell();
@@ -116,13 +116,34 @@ public class Start {
 		} else if (n == 2) {
 			System.out.println("[입출고 정보] 원하는 메뉴를 선택하세요.");
 			System.out.println("================================");
-			System.out.println("1. 입고정보관리 2. 출고정보관리 3. 상품별입출고 내역 4. 기간별입출고 내역");
+			System.out.println("1. 입고정보 2. 출고정보 3. 입출고관리 4. 입출고조회");
 			int y = Integer.parseInt(sc.next());
-//수정 필요
 			if (y == 1) {
+				System.out.println("[입출고 정보 - 입고정보] 원하는 메뉴를 선택하세요.");
+				System.out.println("================================");
+				System.out.println("1. 검색 2. 전체목록");
+				int a = Integer.parseInt(sc.next());
+				if (a == 1) { 
+					in.searchIn();
+				} else if (a == 2) {
+					in.viewIn();
+				} else 
+					System.out.println("잘못 입력했습니다. 다시 입력해주세요.");
 			} else if (y == 2) {
+				System.out.println("[입출고 정보 - 출고정보] 원하는 메뉴를 선택하세요.");
+				System.out.println("================================");
+				System.out.println("1. 검색 2. 전체목록");
+				int b = Integer.parseInt(sc.next());
+				if (b == 1) {
+					out.searchOut();
+				} else if (b == 2) {
+					out.viewOut();
+				} else 
+					System.out.println("잘못 입력했습니다. 다시 입력해주세요.");
 			} else if (y == 3) {
+//입출고내역 등록하는 프로시저 호출				
 			} else if (y == 4) {
+//입출고 조회하기				
 			} else
 				System.out.println("잘못 입력했습니다. 다시 입력해주세요.");
 		} else if (n == 3) {
