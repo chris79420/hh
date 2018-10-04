@@ -96,18 +96,46 @@ public class BuyDao {
 	}
 	
 	
-	public void editBuy(BuyBean eb) {
+	public void editBuy() {
 		
+		viewBuy();
+		BuyBean eb= new BuyBean();
+		eb=searchBuy();
+		String sql="";
 		
-		String sql;/*="update buy_ent set ~~~~"+
-					"where b_id=?";
-		*/
+		System.out.println("수정하려는 것을 고르시오(b_code:1 "+
+		"업체명 b_name:2 " + 
+		"주소 b_addr:3 " + 
+		"연락처 b_tel:4" + 
+		"대표자명 b_rep:5");
+		
+		int choice=sc.nextInt();
+		sc.nextLine();
+		System.out.println("수정하려는 값을 입력하시오");
+		String editStr=sc.nextLine();
+		switch(choice){
+		case 1:
+			sql="update set b_code=? where b_code=?";
+			break;
+		case 2:
+			sql="update set b_name=? where b_code=?";
+			break;
+		case 3:
+			sql="update set b_addr=? where b_code=?";
+			break;
+		case 4:
+			sql="update set b_tel=? where b_code=?";
+			break;
+		case 5:
+			sql="update set b_rep=? where b_code=?";
+			break;
+		}
+		
 		try {
+			
 			pstmt = conn.prepareStatement(sql);
-			/*pstmt.setString(1, eb.getB_code());
-			pstmt.setString(2,eb.getContent());
-			pstmt.setInt(3, eb.getBid());
-			*/
+			pstmt.setString(1, editStr);
+			pstmt.setString(2, eb.getB_code());
 			int n = pstmt.executeUpdate();
 			System.out.println(n+"건업뎃");
 		}
@@ -117,18 +145,17 @@ public class BuyDao {
 	}
 	
 	public BuyBean searchBuy() {
-		String sql="select * from buy_ent where b_code = ? or b_name=?";
+		String sql="select * from buy_ent where b_code = ?";
 		BuyBean bb = new BuyBean();
-		System.out.println("찾기를 원하는 b_code나 b_name을 입력하세요");
+		System.out.println("b_code를 입력하세요");
 		String temp = sc.nextLine();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, temp);
-			pstmt.setString(2, temp);
 			
 			rs=pstmt.executeQuery();
-			while(rs.next()) {
+			if(rs.next()) {
 				bb = new BuyBean();
 				bb.setB_code(rs.getString("b_code"));
 				bb.setB_name(rs.getString("b_name"));
@@ -137,6 +164,10 @@ public class BuyDao {
 				bb.setB_rep(rs.getString("b_rep"));
 				//출력구문만들기
 				System.out.println(bb);
+			}
+			else
+			{
+				System.out.println("입력값을 확인하세요");
 			}
 		}
 		catch(SQLException e){
