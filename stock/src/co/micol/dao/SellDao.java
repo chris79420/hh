@@ -97,50 +97,68 @@ public class SellDao {
 	}
 	
 	
-	public void editBuy() {
+	public void editSell() {
 		
-		System.out.println("수정하려는 것을 고르시오(b_code:1 "+
-		"업체명 b_name:2 " + 
-		"주소 b_addr:3 " + 
-		"연락처 b_tel:4" + 
-		"대표자명 b_rep:5");
-		int temp = sc.nextInt();
+		viewSell();
+		SellBean eb= new SellBean();
+		eb=searchSell();
+		String sql="";
+		
+		System.out.println("수정하려는 것을 고르시오(s_code:1 "+
+		"업체명 s_name:2 " + 
+		"주소 s_addr:3 " + 
+		"연락처 s_tel:4" + 
+		"대표자명 s_rep:5");
+		
+		int choice=sc.nextInt();
 		sc.nextLine();
+		System.out.println("수정하려는 값을 입력하시오");
+		String editStr=sc.nextLine();
+		switch(choice){
+		case 1:
+			sql="update set s_code=? where s_code=?";
+			break;
+		case 2:
+			sql="update set s_name=? where s_code=?";
+			break;
+		case 3:
+			sql="update set s_addr=? where s_code=?";
+			break;
+		case 4:
+			sql="update set s_tel=? where s_code=?";
+			break;
+		case 5:
+			sql="update set s_rep=? where s_code=?";
+			break;
+		}
 		
-		SellBean eb;
-		
-		String sql;/*="update buy_ent set ~~~~"+
-					"where b_id=?";
-		*/
 		try {
+			
 			pstmt = conn.prepareStatement(sql);
-			/*pstmt.setString(1, eb.getB_code());
-			pstmt.setString(2,eb.getContent());
-			pstmt.setInt(3, eb.getBid());
-			*/
+			pstmt.setString(1, editStr);
+			pstmt.setString(2, eb.getS_code());
 			int n = pstmt.executeUpdate();
 			System.out.println(n+"건업뎃");
 		}
+	
 		catch(SQLException e){
 			e.printStackTrace();	
 		}
 	}
 	
-	public void searchSell() {
-		String sql="select * from buy_ent where b_code = ? or b_name=?";
+	public SellBean searchSell() {
+		String sql="select * from sell_ent where s_code = ?";
 		SellBean sb = new SellBean();
-		String temp =sc.nextLine();
+		System.out.println("s_code를 입력하시오");
+		String temp=sc.nextLine();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, temp);
-			pstmt.setString(2, temp);
 			
 			rs=pstmt.executeQuery();
 			if (rs.next()) {
-				do {
-
-					sb = new SellBean();
+									sb = new SellBean();
 					sb.setS_code(rs.getString("s_code"));
 					sb.setS_name(rs.getString("s_name"));
 					sb.setS_addr(rs.getString("s_addr"));
@@ -148,20 +166,20 @@ public class SellDao {
 					sb.setS_rep(rs.getString("s_rep"));
 					// 출력구문만들기
 					System.out.println(sb);
-				} while (rs.next());
-			} else
+				} 
+			else
 				System.out.println("조회할 데이터가 없습니다.");
 		}
 		catch(SQLException e){
 			e.printStackTrace();
 
 		}
-		//return sb;
+		return sb;
 		
 	}
-
+	
 	public void viewSell() {
-		String sql = "select * from buy_ent";
+		String sql = "select * from sell_ent";
 		SellBean sb = new SellBean();
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -189,5 +207,5 @@ public class SellDao {
 	public void close() throws SQLException {
 		pstmt.close();
 		conn.close();
-	}
+	}	
 }

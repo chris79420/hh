@@ -1,7 +1,7 @@
 package co.micol.bean;
 
 public class InBean {
-	private int in_code;
+	private String in_code;
 	private int in_line;
 	private int in_b_code;
 	private String in_pro_code; 
@@ -10,10 +10,10 @@ public class InBean {
 	private int in_sum;
 	private String date;
 	
-	public int getIn_code() {
+	public String getIn_code() {
 		return in_code;
 	}
-	public void setIn_code(int in_code) {
+	public void setIn_code(String in_code) {
 		this.in_code = in_code;
 	}
 	public int getIn_line() {
@@ -53,10 +53,10 @@ public class InBean {
 	public void setIn_sum(int in_sum) {
 		this.in_sum = in_sum;
 	}
-	public String getDate() {
+	public String getIn_date() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setIn_date(String date) {
 		this.date = date;
 	}
 	@Override

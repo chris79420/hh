@@ -177,6 +177,9 @@ public class BuyDao {
 		return bb;
 		
 	}
+	public void BuySearch() {
+		
+	}
 	public ResultSet viewBuy() {
 		String sql = "select * from buy_ent";
 		BuyBean vb = new BuyBean();
