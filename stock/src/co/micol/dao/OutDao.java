@@ -119,17 +119,49 @@ public class OutDao {
 		}
 	}
 
-	public void editIn(OutBean eb) {
+	public void editIn() {
 
-		String sql;/*
-					 * ="update out_t set ~~~~"+ "where b_id=?";
-					 */
+		viewOut();
+		OutBean eb = new OutBean();
+		eb=searchOut();
+		
+		System.out.println("수정을 원하는 column의 번호를 입력하시오"+
+		"Out_code(1) Out_line(2) Out_amount(3) Out_price(4) Out_date(5)"+
+				"Out_b_code(6) Out_pro_code(7)");
+		int choice = sc.nextInt();
+		sc.nextLine();
+		String sql=new String();
+		System.out.println("수정하려는 값을 입력하시오");
+		String editStr=sc.nextLine();
+		switch(choice) {
+		case 1:
+			sql="update Out_t set in_code=?"+ "where Out_code=?";
+			break;
+		case 2:
+			sql="update Out_t set in_line=?"+ "where Out_code=?";
+			break;
+		case 3:
+			sql="update Out_t set in_amount=?"+ "where Out_code=?";
+			break;
+		case 4:
+			sql="update Out_t set in_price=?"+ "where Out_code=?";
+			break;
+		case 5:
+			sql="update Out_t set in_date=?"+ "where Out_code=?";
+			break;
+		case 6:
+			sql="update Out_t set in_b_code=?"+ "where Out_code=?";
+			break;
+		case 7:
+			sql="update Out_t set in_pro_code=?"+ "where Out_code=?";
+			break;
+		}
+					 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			/*
-			 * pstmt.setString(1, eb.getB_code()); pstmt.setString(2,eb.getContent());
-			 * pstmt.setInt(3, eb.getBid());
-			 */
+			pstmt.setString(1, editStr); 
+			pstmt.setString(2,eb.getOut_code());
+			
 			int n = pstmt.executeUpdate();
 			System.out.println(n + "건업뎃");
 		} catch (SQLException e) {
@@ -137,10 +169,11 @@ public class OutDao {
 		}
 	}
 
-	public void searchOut(int temp) {
+	public OutBean searchOut() {
 		String sql = "select * from out_t where out_code = ?";
 		OutBean vb = new OutBean();
-
+		int temp = sc.nextInt();
+		sc.nextLine();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, temp);
@@ -167,7 +200,7 @@ public class OutDao {
 			e.printStackTrace();
 
 		}
-
+		return vb;
 	}
 
 	public void viewOut() {

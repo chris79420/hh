@@ -124,15 +124,43 @@ public class InDao {
 		InBean eb = new InBean();
 		eb=searchIn();
 		
-		String sql;/*
-					 * ="update In_t set ~~~~"+ "where b_id=?";
-					 */
+		System.out.println("수정을 원하는 column의 번호를 입력하시오"+
+		"in_code(1) in_line(2) in_amount(3) in_price(4) in_date(5)"+
+				"in_b_code(6) in_pro_code(7)");
+		int choice = sc.nextInt();
+		sc.nextLine();
+		String sql=new String();
+		System.out.println("수정하려는 값을 입력하시오");
+		String editStr=sc.nextLine();
+		switch(choice) {
+		case 1:
+			sql="update In_t set in_code=?"+ "where in_code=?";
+			break;
+		case 2:
+			sql="update In_t set in_line=?"+ "where in_code=?";
+			break;
+		case 3:
+			sql="update In_t set in_amount=?"+ "where in_code=?";
+			break;
+		case 4:
+			sql="update In_t set in_price=?"+ "where in_code=?";
+			break;
+		case 5:
+			sql="update In_t set in_date=?"+ "where in_code=?";
+			break;
+		case 6:
+			sql="update In_t set in_b_code=?"+ "where in_code=?";
+			break;
+		case 7:
+			sql="update In_t set in_pro_code=?"+ "where in_code=?";
+			break;
+		}
+					 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			/*
-			 * pstmt.setString(1, eb.getB_code()); pstmt.setString(2,eb.getContent());
-			 * pstmt.setInt(3, eb.getBid());
-			 */
+			pstmt.setString(1, editStr); 
+			pstmt.setString(2,eb.getIn_code());
+			
 			int n = pstmt.executeUpdate();
 			System.out.println(n + "건업뎃");
 		} catch (SQLException e) {
