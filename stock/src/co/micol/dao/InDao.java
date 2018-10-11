@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
-
 import co.micol.bean.InBean;
 import co.micol.bean.OutBean;
 
@@ -38,11 +37,6 @@ public class InDao {
 			e.printStackTrace();
 		}
 	}
-
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/chris79420/javaStudy.git
 	public int purchase_Order_Num() {
 		String seqNextVal = "select in_seq.nextval from dual";
 		int in_code = 0;

@@ -65,10 +65,5 @@ public class OutBean {
 		return "OutBean [out_code=" + out_code + ", out_line=" + out_line + ", out_s_code=" + out_s_code
 				+ ", out_pro_code=" + out_pro_code + ", out_amount=" + out_amount + ", out_price=" + out_price
 				+ ", out_sum=" + out_sum + ", out_date=" + out_date + "]";
-<<<<<<< HEAD
-=======
 	}
-
->>>>>>> branch 'master' of https://github.com/chris79420/javaStudy.git
-	
 }
