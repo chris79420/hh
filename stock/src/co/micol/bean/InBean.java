@@ -1,7 +1,7 @@
 package co.micol.bean;
 
 public class InBean {
-	private int in_code;
+	private String in_code;
 	private int in_line;
 	private int in_b_code;
 	private String in_pro_code; 
@@ -10,10 +10,10 @@ public class InBean {
 	private int in_sum;
 	private String in_date;
 	
-	public int getIn_code() {
+	public String getIn_code() {
 		return in_code;
 	}
-	public void setIn_code(int in_code) {
+	public void setIn_code(String in_code) {
 		this.in_code = in_code;
 	}
 	public int getIn_line() {
@@ -61,10 +61,14 @@ public class InBean {
 	}
 	@Override
 	public String toString() {
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/chris79420/javaStudy.git
 		return "InBean [in_code=" + in_code + ", in_line=" + in_line + ", in_b_code=" + in_b_code + ", in_pro_code="
 				+ in_pro_code + ", in_amount=" + in_amount + ", in_price=" + in_price + ", in_sum=" + in_sum + ", date="
 				+ date + "]";
 	}
+
 	
 }

@@ -39,7 +39,10 @@ public class InDao {
 		}
 	}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/chris79420/javaStudy.git
 	public int purchase_Order_Num() {
 		String seqNextVal = "select in_seq.nextval from dual";
 		int in_code = 0;
