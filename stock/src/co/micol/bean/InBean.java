@@ -3,10 +3,12 @@ package co.micol.bean;
 public class InBean {
 	private int in_code;
 	private int in_line;
+	private int in_b_code;
+	private String in_pro_code; 
 	private int in_amount;
 	private int in_price;
 	private int in_sum;
-	private String date;
+	private String in_date;
 	
 	public int getIn_code() {
 		return in_code;
@@ -19,6 +21,19 @@ public class InBean {
 	}
 	public void setIn_line(int in_line) {
 		this.in_line = in_line;
+	}
+	
+	public int getIn_b_code() {
+		return in_b_code;
+	}
+	public void setIn_b_code(int in_b_code) {
+		this.in_b_code = in_b_code;
+	}
+	public String getIn_pro_code() {
+		return in_pro_code;
+	}
+	public void setIn_pro_code(String in_pro_code) {
+		this.in_pro_code = in_pro_code;
 	}
 	public int getIn_amount() {
 		return in_amount;
@@ -38,16 +53,18 @@ public class InBean {
 	public void setIn_sum(int in_sum) {
 		this.in_sum = in_sum;
 	}
-	public String getDate() {
+	public String getIn_date() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setIn_date(String date) {
 		this.date = date;
 	}
 	@Override
 	public String toString() {
-		return "InBean [in_code=" + in_code + ", in_line=" + in_line + ", in_amount=" + in_amount + ", in_price="
-				+ in_price + ", in_sum=" + in_sum + ", date=" + date + "]";
+
+		return "InBean [in_code=" + in_code + ", in_line=" + in_line + ", in_b_code=" + in_b_code + ", in_pro_code="
+				+ in_pro_code + ", in_amount=" + in_amount + ", in_price=" + in_price + ", in_sum=" + in_sum + ", date="
+				+ date + "]";
 	}
 	
 }

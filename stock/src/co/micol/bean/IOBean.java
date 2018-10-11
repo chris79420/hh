@@ -39,4 +39,9 @@ public class IOBean {
 	public void setSt_Code(int st_Code) {
 		St_Code = st_Code;
 	}
+	@Override
+	public String toString() {
+		return "IOBean [IO_No=" + IO_No + ", Pro_code" + Pro_code + ", IO_Date" + IO_Date + ", IO_Amount" + IO_Amount
+				 + ", St_Code" + St_Code + "]";
+	}
 }
