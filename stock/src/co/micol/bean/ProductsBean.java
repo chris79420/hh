@@ -52,4 +52,11 @@ public class ProductsBean {
 	public void setSt_code(int st_code) {
 		this.st_code = st_code;
 	}
+	
+	@Override
+	public String toString() {
+
+		return "ProductsBean [cat_code=" + cat_code + ", pro_code=" + pro_code + ", pro_name=" + pro_name + ", pro_std="
+				+ pro_std + ", pro_unit=" + pro_unit + ", pro_price=" + pro_price + ", st_code=" + st_code + "]";
+	}
 }

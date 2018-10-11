@@ -2,11 +2,7 @@ package co.micol.controller;
 
 import java.sql.SQLException;
 import java.util.Scanner;
-import co.micol.bean.BuyBean;
-import co.micol.bean.InBean;
-import co.micol.bean.OutBean;
 import co.micol.bean.ProductsBean;
-import co.micol.bean.SellBean;
 import co.micol.bean.StorageBean;
 import co.micol.dao.BuyDao;
 import co.micol.dao.InDao;
@@ -18,26 +14,12 @@ import co.micol.dao.StorageDao;
 public class Start {
 
 	public Start() throws SQLException {
-
 		Scanner sc = new Scanner(System.in);
-		ProductsBean pb = new ProductsBean();
-		StorageBean stb = new StorageBean();
-		BuyBean bb = new BuyBean();
-		SellBean sb = new SellBean();
-		InBean ib = new InBean();
-		OutBean ob = new OutBean();
-		ProductsDao pro = new ProductsDao();
-		StorageDao sto = new StorageDao();
-		BuyDao buy = new BuyDao();
-		SellDao sel = new SellDao();
-		InDao in = new InDao();
-		OutDao out = new OutDao();
 
 		System.out.println("원하는 메뉴를 선택하세요.");
 		System.out.println("=====================");
 		System.out.println("1. 기초정보관리 2. 입출고정보 3. 재고정보 4. 종료");
 		int n = Integer.parseInt(sc.next());
-
 		if (n == 1) {
 			System.out.println("[기초정보 관리] 원하는 메뉴를 선택하세요.");
 			System.out.println("==================================");
@@ -48,6 +30,8 @@ public class Start {
 				System.out.println("===========================================");
 				System.out.println("1. 등록 2. 수정 3. 삭제 4. 검색 5. 전체목록");
 				int a = Integer.parseInt(sc.next());
+				ProductsDao pro = new ProductsDao();
+				ProductsBean pb = new ProductsBean();
 				if (a == 1) {
 					pro.InsertPro(pb);
 				} else if (a == 2) {
@@ -57,6 +41,7 @@ public class Start {
 				} else if (a == 4) {
 					pro.SearchPro();
 				} else if (a == 5) {
+					System.out.println("===============================품목 List===============================");
 					pro.ViewPro();
 				} else					
 					System.out.println("잘못 입력했습니다. 다시 입력해주세요.");
@@ -65,6 +50,8 @@ public class Start {
 				System.out.println("===========================================");
 				System.out.println("1. 등록 2. 수정 3. 삭제 4. 검색 5. 전체목록");
 				int b = Integer.parseInt(sc.next());
+				StorageBean stb = new StorageBean();
+				StorageDao sto = new StorageDao();
 				if (b == 1) {
 					sto.InsertStorage(stb);
 				} else if (b == 2) {
@@ -82,6 +69,7 @@ public class Start {
 				System.out.println("==============================================");
 				System.out.println("1. 등록 2. 수정 3. 삭제 4. 검색 5. 전체목록");
 				int c = Integer.parseInt(sc.next());
+				BuyDao buy = new BuyDao();
 				if (c == 1) {
 					buy.insertBuy();
 				} else if (c == 2) {
@@ -99,6 +87,7 @@ public class Start {
 				System.out.println("===============================================");
 				System.out.println("1. 등록 2. 수정 3. 삭제 4. 검색 5. 전체목록");
 				int d = Integer.parseInt(sc.next());
+				SellDao sel = new SellDao();
 				if (d == 1) {
 					sel.insertSell();
 				} else if (d == 2) {
@@ -123,6 +112,7 @@ public class Start {
 				System.out.println("================================");
 				System.out.println("1. 검색 2. 전체목록");
 				int a = Integer.parseInt(sc.next());
+				InDao in = new InDao();
 				if (a == 1) { 
 					in.searchIn();
 				} else if (a == 2) {
@@ -134,6 +124,7 @@ public class Start {
 				System.out.println("================================");
 				System.out.println("1. 검색 2. 전체목록");
 				int b = Integer.parseInt(sc.next());
+				OutDao out = new OutDao();
 				if (b == 1) {
 					out.searchOut();
 				} else if (b == 2) {
