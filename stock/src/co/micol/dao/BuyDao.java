@@ -40,7 +40,7 @@ public class BuyDao {
 	
 	
 	public void insertBuy() {
-		String sql ="Insert into buy_ent(b_code,b_name,b_addr,b_tel,b_rep)"
+		String sql ="Insert into buy_ent "
 				+ "values(?,?,?,?,?)";
 
 		BuyBean B = new BuyBean();
@@ -69,15 +69,12 @@ public class BuyDao {
 				System.out.println("입력실패");
 			else
 				System.out.println("입력성공");
-			////작성글보여주기루틴
-				
-		} catch(SQLException e)
-		{
+			viewBuy();				
+		} catch(SQLException e) {
 			e.printStackTrace();
 			System.out.println("입력 값을 다시 확인");
 		}
 	}
-	
 	
 	public void deleteBuy() {
 		String sql="delete from buy_ent where b_code = ?";
@@ -94,7 +91,6 @@ public class BuyDao {
 			e.printStackTrace();
 		}
 	}
-	
 	
 	public void editBuy() {
 		
@@ -164,22 +160,15 @@ public class BuyDao {
 				bb.setB_rep(rs.getString("b_rep"));
 				//출력구문만들기
 				System.out.println(bb);
+			} else {
+				System.out.println("입력 값을 확인하세요");
 			}
-			else
-			{
-				System.out.println("입력값을 확인하세요");
-			}
-		}
-		catch(SQLException e){
+		} catch(SQLException e){
 			e.printStackTrace();
-
 		}
 		return bb;
-		
 	}
-	public void BuySearch() {
-		
-	}
+
 	public ResultSet viewBuy() {
 		String sql = "select * from buy_ent";
 		BuyBean vb = new BuyBean();
@@ -188,20 +177,17 @@ public class BuyDao {
 			rs=pstmt.executeQuery();
 			if (rs.next()) {
 				do {
-
-					vb = new BuyBean();
 					vb.setB_code(rs.getString("b_code"));
 					vb.setB_name(rs.getString("b_name"));
 					vb.setB_addr(rs.getString("b_addr"));
 					vb.setB_tel(rs.getString("b_tel"));
 					vb.setB_rep(rs.getString("b_rep"));
-					// 출력구문만들기
 					System.out.println(vb);
 				} while (rs.next());
 			} else
 				System.out.println("조회할 데이터가 없습니다.");
-		}
-		catch(SQLException e){
+			rs.close();
+		} catch(SQLException e){
 			e.printStackTrace();
 		}
 		return rs;

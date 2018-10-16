@@ -30,7 +30,7 @@ public class ProductsDao {
 	}
 
 	public void InsertPro(ProductsBean ipb) throws SQLException { // 상품 등록
-		sql = "insert into products " + "values(?,concat('?','imount_seq.nextval'),?,?,?,?)";
+		sql = "insert into products " + "values(?,imount_seq.nextval,?,?,?,?,?)";
 		System.out.println("분류코드를 입력하세요.");
 		ipb.setCat_code(sc.nextLine());
 		System.out.println("상품명을 입력하세요");
@@ -47,111 +47,103 @@ public class ProductsDao {
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, ipb.getCat_code());
-			psmt.setString(2, ipb.getCat_code());
-			psmt.setString(3, ipb.getPro_name());
-			psmt.setString(4, ipb.getPro_std());
-			psmt.setString(5, ipb.getPro_unit());
+			psmt.setString(2, ipb.getPro_name());
+			psmt.setString(3, ipb.getPro_std());
+			psmt.setString(4, ipb.getPro_unit());
+			psmt.setInt(5, ipb.getPro_price());
 			psmt.setInt(6, ipb.getSt_code());
-			psmt.setInt(7, ipb.getPro_price());
 
-			r = psmt.executeUpdate();
-
+			int r = psmt.executeUpdate();
+			if (r == 0)
+				System.out.println("등록에 실패했습니다.");
+			else
+				System.out.println(r + "건을 성공적으로 등록했습니다.");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		ViewPro();
 	}
 
 	public int DeletePro() throws SQLException { // 상품 삭제
-		sc = new Scanner(System.in);
-		sql = "delete from products where pro_code = ?";
 		ViewPro();
-		System.out.println("========================");
+		sql = "delete from products where pro_code =?";
+		System.out.println("=============================");
 		System.out.println("삭제할 제품의 상품코드를 입력하세요.");
-		String d = sc.nextLine();
+		String dpb = sc.nextLine();
 
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, d);
-			r = psmt.executeUpdate();
+			psmt.setString(1, dpb);
+			int r = psmt.executeUpdate();
+			if (r == 0)
+				System.out.println("삭제에 실패했습니다.");
+			else
+				System.out.println(r + "건을 성공적으로 삭제했습니다.");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		ViewPro();
+
 		return r;
 	}
 
 	public void EditPro(ProductsBean epb) throws SQLException { // 상품 수정
-		sql = "update products " + "set cat_code = ?, pro_name = ?, pro_std = ?, pro_unit = ?, pro_price = ? "
-				+ "where pro_code = ?";
-
 		ViewPro();
-		System.out.println("======================");
-		System.out.println("수정할 상품 코드를 입력하세요.");
-
-		epb.setPro_code(sc.nextLine());
-
-		try {
-
-			// while (rs.next()) {
-			psmt.setString(1, epb.getCat_code());
-			psmt.setString(2, epb.getPro_name());
-			psmt.setString(3, epb.getPro_std());
-			psmt.setString(4, epb.getPro_unit());
-			psmt.setInt(5, epb.getPro_price());
-			psmt.setInt(6, epb.getSt_code());
-			psmt.setString(7, epb.getPro_code());
-			// }
-		} catch (SQLException e) {
-			e.printStackTrace();
+		String sql = "";
+		int editInt = 0;
+		String editStr = "";
+		String inp;
+		System.out.println("수정할 대상을 고르세요. 1:분류코드 2:상품코드 3:이름 4: 단위 5:규격 6: 단가 7:창고코드");
+		int choice = sc.nextInt();
+		sc.nextLine();
+		if (choice == 6 || choice == 7) {
+			System.out.println("수정할 값을 입력하세요.");
+			editInt = sc.nextInt();
+			sc.nextLine();
+			System.out.println("수정할 상품의 코드를 입력하세요.");
+			inp = sc.nextLine();
+		} else {
+			System.out.println("수정할 값을 입력하세요.");
+			editStr = sc.nextLine();
+			System.out.println("수정할 상품의 코드를 입력하세요.");			
+			inp = sc.nextLine();
 		}
-
-		System.out.println("===================");
-		System.out.println("수정할 대상을 선택하세요.\n" + "1:분류코드 2:상품이름 3:상품규격 4:상품단위 5:창고코드");
-		int n = Integer.parseInt(sc.nextLine());
-
-		switch (n) {
+		switch (choice) {
 		case 1:
-			System.out.println("수정할 분류코드를 입력하세요.");
-			epb.setCat_code(sc.nextLine());
+			sql = "update products set cat_code = ? where pro_code =?";
 			break;
 		case 2:
-			System.out.println("수정할 상품 이름를 입력하세요.");
-			epb.setPro_name(sc.nextLine());
+			sql = "update products set pro_code = ? where pro_code = "+inp;
 			break;
 		case 3:
-			System.out.println("수정할 상품 규격을 입력하세요.");
-			epb.setPro_std(sc.nextLine());
+			sql = "update products set pro_name = ? where pro_code = "+inp;
 			break;
 		case 4:
-			System.out.println("수정할 상품 단위를 입력하세요.");
-			epb.setPro_unit(sc.nextLine());
+			sql = "update products set pro_std = ? where pro_code = "+inp;
 			break;
 		case 5:
-			System.out.println("수정할 상품 단가를 입력하세요.");
-			epb.setPro_price(sc.nextInt());
+			sql = "update products set pro_unit = ? where pro_code = "+inp;
 			break;
 		case 6:
-			System.out.println("수정할 상품의 창고코드를 입력하세요.");
-			epb.setSt_code(sc.nextInt());
+			sql = "update products set pro_price = ? where pro_code = "+inp;
+			break;
+		case 7:
+			sql = "update products set st_code = ? where pro_code = "+inp;
 			break;
 		}
-		EditPro(epb); // 수정 실행
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, epb.getCat_code());
-			psmt.setString(2, epb.getPro_name());
-			psmt.setString(3, epb.getPro_std());
-			psmt.setString(4, epb.getPro_unit());
-			psmt.setInt(5, epb.getPro_price());
-			psmt.setInt(6, epb.getSt_code());
-			psmt.setString(7, epb.getPro_code());
+			if (choice == 6 || choice == 7) {
+				psmt.setInt(1, editInt);
+			} else {
+				psmt.setString(1, editStr); 
+				psmt.setString(2, inp);
+			}
+			System.out.println(editStr + inp +"/"+ sql);
+			
 			int r = psmt.executeUpdate();
-
 			if (r == 0)
-				System.out.println("수정에 실패했습니다'^'");
+				System.out.println("수정에 실패했습니다.");
 			else
-				System.out.println("성공적으로 수정되었습니다:-)");
+				System.out.println(r + "건을 성공적으로 수정했습니다.");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -159,25 +151,24 @@ public class ProductsDao {
 	}
 
 	public void SearchPro() { // 상품 세부조회
-		sc = new Scanner(System.in);
-		sql = "select * from products where pro_code = ?";
+		ProductsBean spb = new ProductsBean();
+		sql = "select * from products where pro_code =?";
 		System.out.println("조회할 제품의 상품코드를 입력하세요");
-		String s = sc.nextLine();
+		spb.setPro_code(sc.nextLine());
 
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, s);
+			psmt.setString(1, spb.getPro_code());
 			rs = psmt.executeQuery();
 
 			if (rs.next()) {
-				ProductsBean spb = new ProductsBean();
 				spb.setCat_code(rs.getString("cat_code"));
 				spb.setPro_code(rs.getString("pro_code"));
 				spb.setPro_name(rs.getString("pro_name"));
 				spb.setPro_std(rs.getString("pro_std"));
 				spb.setPro_unit(rs.getString("pro_unit"));
 				spb.setPro_price(rs.getInt("pro_price"));
-				spb.setPro_price(rs.getInt("st_code"));
+				spb.setSt_code(rs.getInt("st_code"));
 			} else
 				System.out.println("조회할 상품이 없습니다.");
 
@@ -187,6 +178,7 @@ public class ProductsDao {
 	}
 
 	public void ViewPro() throws SQLException { // 상품목록보기
+		ProductsBean vpb = new ProductsBean();
 		sql = "select * from products";
 
 		try {
@@ -195,14 +187,14 @@ public class ProductsDao {
 
 			if (rs.next()) {
 				do {
-					ProductsBean vpb = new ProductsBean();
 					vpb.setCat_code(rs.getString("cat_code"));
 					vpb.setPro_code(rs.getString("pro_code"));
 					vpb.setPro_name(rs.getString("pro_name"));
 					vpb.setPro_std(rs.getString("pro_std"));
 					vpb.setPro_unit(rs.getString("pro_unit"));
 					vpb.setPro_price(rs.getInt("pro_price"));
-					vpb.setPro_price(rs.getInt("st_code"));
+					vpb.setSt_code(rs.getInt("st_code"));
+					System.out.println(vpb);
 				} while (rs.next());
 			} else
 				System.out.println("제품이 존재하지 않습니다.");

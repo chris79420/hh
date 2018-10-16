@@ -41,20 +41,19 @@ public class SellDao {
 	
 	
 	public void insertSell() {
-		String sql ="Insert into sell_ent(s_code,s_name,s_addr,s_tel,s_rep)"
+		String sql ="Insert into sell_ent "
 				+ "values(?,?,?,?,?)";
 		SellBean B = new SellBean();
-		System.out.println("s_code");
+		System.out.println("판매업체 코드를 입력하세요.");
 		B.setS_code(sc.nextLine());
-		System.out.println("s_name");
+		System.out.println("판매업체 이름을 입력하세요.");
 		B.setS_name(sc.nextLine());
-		System.out.println("s_addr");
+		System.out.println("판매업체 주소를 입력하세요.");
 		B.setS_addr(sc.nextLine());
-		System.out.println("s_tel");
+		System.out.println("판매업체 전화번호를 입력하세요.");
 		B.setS_tel(sc.nextLine());
-		System.out.println("s_rep");
+		System.out.println("판매업체 대표자명을 입력하세요.");
 		B.setS_rep(sc.nextLine());		
-		
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -65,30 +64,32 @@ public class SellDao {
 			pstmt.setString(5, B.getS_rep());
 			
 			int n = pstmt.executeUpdate();
-			
 			if(n==0)
-				System.out.println("입력실패");
+				System.out.println("입력에 실패했습니다.");
 			else
-				System.out.println("입력성공");
-			////작성글보여주기루틴
-				
+				System.out.println(n+"건을 성공적으로 입력했습니다.");
+				viewSell();
 		} catch(SQLException e)
 		{
 			e.printStackTrace();
 		}
 	}
 	
-	
 	public void deleteSell() {
+		viewSell();
 		String sql="delete from sell_ent where s_code = ?";
-
-		System.out.println("삭제할 업체코드를 입력");
+		System.out.println("============================");
+		System.out.println("삭제할 판매업체 코드를 입력하세요.");
 		String tmp = sc.nextLine();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, tmp);
 			pstmt.executeUpdate();
-			
+			int r = pstmt.executeUpdate();
+			if (r == 0)
+				System.out.println("삭제에 실패했습니다.");
+			else
+				System.out.println(r + "건을 성공적으로 삭제했습니다.");
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -96,9 +97,7 @@ public class SellDao {
 		sc.close();
 	}
 	
-	
-	public void editSell() {
-		
+	public void editSell() {	
 		viewSell();
 		SellBean eb= new SellBean();
 		eb=searchSell();
@@ -138,10 +137,8 @@ public class SellDao {
 			pstmt.setString(1, editStr);
 			pstmt.setString(2, eb.getS_code());
 			int n = pstmt.executeUpdate();
-			System.out.println(n+"건업뎃");
-		}
-	
-		catch(SQLException e){
+			System.out.println(n+"건 업뎃");
+		} catch(SQLException e) {
 			e.printStackTrace();	
 		}
 	}
@@ -172,28 +169,26 @@ public class SellDao {
 		}
 		catch(SQLException e){
 			e.printStackTrace();
-
 		}
 		return sb;
 		
 	}
 	
 	public void viewSell() {
-		String sql = "select * from sell_ent";
 		SellBean sb = new SellBean();
+		String sql = "select * from sell_ent";
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs=pstmt.executeQuery();
+			
 			if (rs.next()) {
 				do {
-
-					sb = new SellBean();
 					sb.setS_code(rs.getString("s_code"));
 					sb.setS_name(rs.getString("s_name"));
 					sb.setS_addr(rs.getString("s_addr"));
 					sb.setS_tel(rs.getString("s_tel"));
 					sb.setS_rep(rs.getString("s_rep"));
-					// 출력구문만들기
 					System.out.println(sb);
 				} while (rs.next());
 			} else
@@ -202,7 +197,6 @@ public class SellDao {
 		catch(SQLException e){
 			e.printStackTrace();
 		}
-		//return rs;
 	}
 	public void close() throws SQLException {
 		pstmt.close();
